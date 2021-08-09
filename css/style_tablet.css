@@ -1,0 +1,29 @@
+body{
+    justify-content: center;
+}
+.header{
+    margin-bottom: 4rem;
+}
+.calculator{
+    max-width: 60rem;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;    
+}
+.calculator__form{
+    display: flex;
+    justify-content: space-between;
+}
+.calculator__dates{
+    width: 48%;
+}
+.percentage{
+    grid-template-columns: repeat(3, minmax(2rem,30%));
+}
+.result{
+    width: 48%;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+.reset{
+    margin-top: 85px;
+}

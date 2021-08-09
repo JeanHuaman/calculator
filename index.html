@@ -3,42 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style_tablet.css" media="(min-width:600px)">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <script src="https://kit.fontawesome.com/9aff345af0.js" crossorigin="anonymous"></script>
   <title>Frontend Mentor | Tip calculator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
 
-  Bill
-
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
-
-  Number of People
-
-  Tip Amount
-  / person
-
-  Total
-  / person
-
-  Reset
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <header class="header">
+    <h1 class="header__title">SPLITTER</h1>
+  </header>
+  <main class="calculator">
+    <section class="calculator__container">
+      <form class="calculator__form">
+        <div class="calculator__dates">
+          <div class="calculator__bill">
+            <label class="title">Bill</label>
+            <div class="wrapper">
+              <span class="icon">$</span>
+              <input type="number" class="value billValue" value="5">
+            </div>
+          </div>
+          <div class="calculator__percentage">
+            <label class="title">Select Tip %</label>
+            <div class="percentage">
+              <span class="percentage__item" data-value="0.05">5%</span>
+              <span class="percentage__item" data-value="0.10">10%</span>
+              <span class="percentage__item" data-value="0.15">15%</span>
+              <span class="percentage__item" data-value="0.25">25%</span>
+              <span class="percentage__item" data-value="0.50">50%</span>
+              <input type="number" class="percentage__itemCustom" placeholder="Custom" >
+            </div>
+          </div>
+          <div class="calculator__person">
+            <div class="calculator__personText">
+              <label class="title">Number of People</label>
+              <span class="warning hidden">Can´t be zero</span>
+            </div>
+            <div class="wrapper">
+              <i class="fas fa-user icon-user"></i>
+              <input type="number" class="value numberPeople" value="5">
+            </div>
+          </div>
+        </div>
+        <div class="result">
+          <div class="result__tipPerson">
+            <div class="result__text">
+              <span class="result__text-first">Tip Amount</span>
+              <span class="result__text-second">/ person</span>
+            </div>
+            <div class="result__number">
+              <span class="result__icon">$</span>
+              <span class="result__value tipPerson">4.27</span>
+            </div>
+          </div>
+          <div class="result__totalPerson">
+            <div class="result__text">
+              <span class="result__text-first">Total</span>
+              <span class="result__text-second">/ person</span>
+            </div>
+            <div class="result__number">
+              <span class="result__icon">$</span>
+              <span class="result__value totalPerson">32.79</span>
+            </div>
+          </div>
+          <button type="reset" class="reset">RESET</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="js/index.js" type="module"></script>
 </body>
 </html>
