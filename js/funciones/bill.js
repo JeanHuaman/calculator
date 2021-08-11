@@ -1,15 +1,33 @@
 const d = document
-let percentageValue = 0
+let percentageValue = 0,
+billValue = 0,
+peopleValue = 0
 
-// export function percentageValue(percentages){
-//     const $percentages = d.querySelectorAll(percentages)
-//     $percentages.forEach(percentage=>{
-//         percentage.addEventListener("click",e=>{
-//             let valor = parseFloat(percentage.dataset.value)
-//             console.log(valor)
-//         })
-//     })
-// }
+function total(){
+    if(percentageValue>=0 && billValue>0 && peopleValue>0){
+        const $tipPerson = d.querySelector(".tipPerson"),
+        $totalPerson = d.querySelector(".totalPerson"),
+        
+        person = {tip:0,total:0}
+
+        person.tip = (billValue*percentageValue)/peopleValue
+        person.total = (billValue/peopleValue) + person.tip
+
+        $tipPerson.textContent = person.tip.toFixed(2)
+        $totalPerson.textContent = person.total.toFixed(2)
+        
+
+    }
+
+
+
+}
+export function bill(e,value){
+    if(e.target.matches(value)){
+        billValue = parseFloat(e.target.value)
+        total()
+    }
+}
 export function percentage(percentages,custom){
     const $percentages = d.querySelectorAll(percentages),
     $percentageCustom = d.querySelector(custom)
@@ -28,49 +46,60 @@ export function percentage(percentages,custom){
             if(customValue>=0){
                 $percentageCustom.value = ""
             }
-            console.log(percentageValue)
-            
+            total()
 
         })
     })
     $percentageCustom.addEventListener("keyup",e=>{
-        customValue = parseFloat($percentageCustom.value)/100
+        customValue = parseInt($percentageCustom.value)/100
         if(customValue >= 0){
             percentageValue = customValue
-            console.log(percentageValue)
-
             $percentages.forEach(percentage=>{
                     percentage.classList.remove("percentage__item--active")
             })
         }
+        total()
         
     })
     
 }
-export function totalBill(bill,numberPerson,warning,e){
-    let $billValue = parseFloat(d.querySelector(bill).value),
-    $numberPerson = parseInt(d.querySelector(numberPerson).value),
-    percentageBill,
-    billxPerson,
-    person= {tip:0,total:0}
 
-    const $msgWarning = d.querySelector(warning)
+export function numberPeople(amount,warning,e){
     
-    if(e.target.matches(numberPerson)){
-        console.log($numberPerson)
+    if(e.target.matches(amount)){
+        const $msgWarning = d.querySelector(warning),
+        $numberPeople = d.querySelector(amount)
+        peopleValue = parseFloat($numberPeople.value)    
 
-        if($numberPerson === 0){
+        if(peopleValue === 0 || $numberPeople.value===""){
             $msgWarning.classList.remove("hidden")
         }else{
             $msgWarning.classList.add("hidden")
-            percentageBill = $billValue*percentageValue
-            billxPerson = $billValue/$numberPerson
-            person.tip = percentageBill/$numberPerson
-            person.total = billxPerson + person.tip
+            total()
         }
 
         // console.log(bill,person,e)
         // console.log(percentageValue)
-        console.log(percentageBill,billxPerson,$numberPerson,$billValue,person)
     }
+}
+
+export function reset(reset){
+    const $percentageItem = d.querySelectorAll(".percentage__item"),
+    $percentageItemCustom = d.querySelector(".percentage__itemCustom"),
+    $tipPerson = d.querySelector(".tipPerson"),
+    $totalPerson = d.querySelector(".totalPerson")
+    d.addEventListener("click",e=>{
+        if(e.target.matches(reset)){
+            $percentageItem.forEach(percentage=>{
+                percentage.classList.remove("percentage__item--active")
+            })
+            $tipPerson.textContent ="0.00"
+            $totalPerson.textContent ="0.00"
+            $percentageItemCustom.value=""
+            percentageValue = 0
+            billValue = 0
+            peopleValue = 0
+        }
+
+    })
 }

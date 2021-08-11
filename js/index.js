@@ -1,13 +1,13 @@
 const d = document
-import { percentage,totalBill } from "./funciones/bill.js"
+import { bill, percentage,numberPeople, reset } from "./funciones/bill.js"
 
 
 d.addEventListener("DOMContentLoaded",e=>{
-    // percentageValue(".percentage__item")
     percentage(".percentage__item",".percentage__itemCustom")
-    
+    reset(".reset")
 })
 
-d.addEventListener("keyup", e=>{
-    totalBill(".billValue",".numberPeople",".warning",e)
+d.addEventListener("input", e=>{
+    bill(e,".billValue")
+    numberPeople(".numberPeople",".warning",e)
 })
